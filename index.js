@@ -1,9 +1,11 @@
 let des = document.getElementById('des').getContext('2d')
 
 // --- OBJETOS ---
-let meteoro1 = new Meteoro(1300, 325, 80, 50, './img/meteoro.png')
+let meteoro1 = new Meteoro(1200, 325, 80, 50, './img/meteoro.png')
 let meteoro2 = new Meteoro(1500, 125, 80, 50, './img/meteoro.png')
 let meteoro3 = new Meteoro(1700, 400, 80, 50, './img/meteoro.png')
+let meteoro4 = new Meteoro(1600, 250, 80, 50, './img/meteoro.png')
+
 
 // Substitua as linhas das 'estrada' ou 'estrela1, 2, 3' por esta:
 let estrela1 = new Estrelas(1400, 100, 40, 40, './img/estrela.png.png')
@@ -22,9 +24,9 @@ let fase = 1
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'w' || e.key === 'ArrowUp') {
-        meuFoguete.dir -= 10
+        meuFoguete.dir = -10
     } else if (e.key === 's' || e.key === 'ArrowDown') {
-        meuFoguete.dir += 10
+        meuFoguete.dir = 10
     }
 })
 
@@ -43,19 +45,19 @@ function game_over() {
 function ver_fase() { 
     if (meuFoguete.pontos > 100 && fase === 1) {
         fase = 2
-        meteoro1.vel = 6
-        meteoro2.vel = 6
-        meteoro3.vel = 6
-    } else if (meuFoguete.pontos > 200 && fase === 2) {
-        fase = 3
         meteoro1.vel = 8
         meteoro2.vel = 8
         meteoro3.vel = 8
+    } else if (meuFoguete.pontos > 200 && fase === 2) {
+        fase = 3
+        meteoro1.vel = 10
+        meteoro2.vel = 10
+        meteoro3.vel = 10
     }
 }
 
 function colisao() {
-    // Colisão com os Meteoros (perde vida)
+    // Colisão com os Meteoros
     if (meuFoguete.colisao(meteoro1)) {
         meteoro1.recomecar()
         meuFoguete.vida -= 1
@@ -68,7 +70,11 @@ function colisao() {
         meteoro3.recomecar()
         meuFoguete.vida -= 1
     }
-
+    if (meuFoguete.colisao(meteoro4)) {
+        meteoro4.recomecar() 
+        meuFoguete.vida -= 1
+    }
+    // Colisão com as Estrelas
     if (meuFoguete.colisao(estrela1)) {
         meuFoguete.pontos += 5
         estrela1.recomecar()
@@ -81,8 +87,7 @@ function colisao() {
         meuFoguete.pontos += 5
         estrela3.recomecar()
     }
-}
-
+} 
 
 function pontuacao() {
     if (meuFoguete.passou(meteoro1)) {
@@ -97,6 +102,10 @@ function pontuacao() {
         meuFoguete.pontos += 1
         meteoro3.recomecar()
     }
+    if (meuFoguete.passou(meteoro4)) {
+        meuFoguete.pontos += 1
+        meteoro4.recomecar() // Corrigido aqui
+    }
 }
 
 function desenha() {
@@ -107,6 +116,7 @@ function desenha() {
         meteoro1.desenhar()
         meteoro2.desenhar()
         meteoro3.desenhar()
+        meteoro4.desenhar()
         meuFoguete.desenhar()
         
         t1.desenhar('Pontos: ' + meuFoguete.pontos, 1000, 40, 'yellow', '18px "Press Start 2P"'); //essa fonte vem de fora, por isso o import la no css
@@ -126,6 +136,7 @@ function atualiza() {
         meteoro1.movimentar()
         meteoro2.movimentar()
         meteoro3.movimentar()
+        meteoro4.movimentar()
         estrela1.mov_est()
         estrela2.mov_est()
         estrela3.mov_est()

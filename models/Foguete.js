@@ -66,7 +66,7 @@ class Foguete extends Obj{
 }
 
 class Meteoro extends Obj{
-    vel = 2
+    vel = 6
     recomecar(){
         this.x = 1300
         this.y = Math.floor(Math.random() * (650 - 50) + 50)
@@ -87,13 +87,13 @@ class Texto{
 }
 
 class Estrelas extends Obj {
-    vel = Math.floor(Math.random() * (6 - 2) + 2) // Começa com uma velocidade aleatória
+    vel = Math.floor(Math.random() * (8 - 4) + 4) // Começa com uma velocidade aleatória
 
     recomecar() {
         this.x = 1300 
         this.y = Math.floor(Math.random() * (650 - 50) + 50) 
-        // Toda vez que ela renascer, ela ganha uma velocidade nova entre 2 e 8
-        this.vel = Math.floor(Math.random() * (8 - 2) + 2) 
+        // Toda vez que ela renascer, ela ganha uma velocidade nova entre 4 e 8
+        this.vel = Math.floor(Math.random() * (8 - 4) + 4) 
     }
 
     mov_est() {
