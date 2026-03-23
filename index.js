@@ -21,6 +21,8 @@ let fase_txt = new Texto()
 let t1_p2 = new Texto() // Pontos P2
 let t2_p2 = new Texto() // Vidas P2
 
+let vencedor = ""; // Armazena o texto de quem ganhou
+
 // Sons removidos para evitar erros de 404
 let jogar = true
 let fase = 1
@@ -53,8 +55,16 @@ document.addEventListener('keyup', (e) => {
 })
 
 function game_over() {
-    if (meuFoguete.vida <= 0 || meuFoguete2.vida <= 0) {
-        jogar = false
+    // 1. Checa se o Jogador 1 atingiu 500 pontos ou o Jogador 2 morreu
+    if (meuFoguete.pontos >= 500 || meuFoguete2.vida <= 0) {
+        jogar = false;
+        vencedor = "JOGADOR 1 VENCEU!";
+    }
+    
+    // 2. Checa se o Jogador 2 atingiu 500 pontos ou o Jogador 1 morreu
+    if (meuFoguete2.pontos >= 500 || meuFoguete.vida <= 0) {
+        jogar = false;
+        vencedor = "JOGADOR 2 VENCEU!";
     }
 }
 function ver_fase() { 
@@ -183,21 +193,23 @@ function desenha() {
         t2.desenhar('Vidas P1: ' + meuFoguete.vida, 40, 40, 'red', '18px "Press Start 2P"');
         fase_txt.desenhar('Fase: ' + fase, 550, 40, 'white', '18px "Press Start 2P"');
 
-        // --- HUD JOGADOR 2 (Embaixo - y=670) ---
-        // Usando cores diferentes (lightblue e orange) para dar destaque
+        // --- HUD JOGADOR 2 (Embaixo) ---
         t1_p2.desenhar('Pontos P2: ' + meuFoguete2.pontos, 950, 670, 'lightblue', '18px "Press Start 2P"');
         t2_p2.desenhar('Vidas P2: ' + meuFoguete2.vida, 40, 670, 'orange', '18px "Press Start 2P"');
 
     } else {
-        // --- TELA DE GAME OVER ---
-        // Centralizado na tela (x=400, y=350)
-        t1.desenhar('GAME OVER', 400, 350, 'yellow', '50px "Press Start 2P"');
+        // --- TELA DE VITÓRIA / GAME OVER ---
+        // Exibe o título principal do fim de jogo
+        t1.desenhar('FIM DE JOGO', 350, 300, 'yellow', '50px "Press Start 2P"');
         
-        // Mostra a pontuação final de ambos
-        t2.desenhar('Pontuação P1: ' + meuFoguete.pontos, 480, 420, 'white', '16px "Press Start 2P"');
-        t1_p2.desenhar('Pontuação P2: ' + meuFoguete2.pontos, 480, 450, 'white', '16px "Press Start 2P"');
+        // Exibe quem venceu 
+        t2.desenhar(vencedor, 330, 400, 'white', '25px "Press Start 2P"');
+        
+        // Mostra a pontuação final de ambos para comparação
+        t1_p2.desenhar('P1: ' + meuFoguete.pontos + ' pts', 480, 460, 'yellow', '16px "Press Start 2P"');
+        t2_p2.desenhar('P2: ' + meuFoguete2.pontos + ' pts', 480, 490, 'lightblue', '16px "Press Start 2P"');
     }
- }
+}
 
 
 function atualiza() {

@@ -73,6 +73,6 @@ button:active {
 }
 
 /* Cores diferentes para botões específicos (opcional) */
-button:nth-child(1):hover { border-color: #00ff00; color: #00ff00; } /* JOGAR fica verde */
-button:nth-child(2):hover { border-color: #00ffff; color: #00ffff; } /* INSTRUÇÕES fica ciano */
-button:nth-child(3):hover { border-color: #ffff00; color: #ffff00; } /* DEV fica amarelo */
+button:nth-child(1):hover { border-color: gray; color: black; } /* JOGAR fica verde */
+button:nth-child(2):hover { border-color: gray; color: black; } /* INSTRUÇÕES fica ciano */
+button:nth-child(3):hover { border-color: gray; color: black; } /* DEV fica amarelo */
