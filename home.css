@@ -1,0 +1,78 @@
+/* Importando a fonte novamente para garantir que funcione nesta página */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./img/navegif.gif'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+}
+
+.game-container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro atrás do menu */
+    padding: 50px;
+    border: 6px solid #fff; /* Borda branca estilo moldura */
+    outline: 6px solid #000; /* Linha preta externa para dar profundidade */
+}
+
+.main-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    font-size: 45px;
+    margin-bottom: 60px;
+    text-shadow: 6px 6px #ff0000; /* Sombra sólida vermelha */
+    letter-spacing: 4px;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- BOTÃO ESTILO PIXEL --- */
+button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    color: #fff;
+    background-color: #000;
+    padding: 20px 40px;
+    border: 4px solid #fff;
+    cursor: pointer;
+    position: relative;
+    text-transform: uppercase;
+    
+    /* Sombra sólida lateral (Efeito 3D de 8-bits) */
+    box-shadow: 8px 8px 0px #555; 
+    transition: all 0.1s;
+}
+
+/* Efeito de Seleção (Hover) */
+button:hover {
+    background-color: #fff;
+    color: #000;
+    box-shadow: 8px 8px 0px #aaa;
+    transform: scale(1.05); /* Dá uma leve crescida */
+}
+
+/* Efeito de Clique (Active) */
+button:active {
+    box-shadow: 0px 0px 0px transparent;
+    transform: translate(8px, 8px); /* Move o botão para cima da sombra */
+}
+
+/* Cores diferentes para botões específicos (opcional) */
+button:nth-child(1):hover { border-color: #00ff00; color: #00ff00; } /* JOGAR fica verde */
+button:nth-child(2):hover { border-color: #00ffff; color: #00ffff; } /* INSTRUÇÕES fica ciano */
+button:nth-child(3):hover { border-color: #ffff00; color: #ffff00; } /* DEV fica amarelo */

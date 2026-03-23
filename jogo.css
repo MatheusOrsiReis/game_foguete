@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* pra importar a fonte diferente pra pontuação, vida e etc */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); 
+
+body {
+    /* Deixa o fundo de toda a página preto */
+    background-image: url('./img/galaxia.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+canvas {
+    /* Borda opcional para ver onde o jogo termina */
+    border: 1px solid #333; 
+    
+   /* Imagem do fundo da galaxia */
+    background-image: url('./img/galaxiaanimada.gif'); 
+    
+    /* Faz a galáxia aparecer inteira sem esticar */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    background-color: black;
+}
+
+.main-title {
+    position: absolute;
+    top: 20px;          
+    left: 50%;
+    transform: translateX(-50%);
+    
+    font-family: 'Press Start 2P', cursive;
+    font-size: 40px;
+    color: white;
+    z-index: 10;        /* Garante que fique na frente do canvas */
+    pointer-events: none; /* Evita que o texto atrapalhe cliques no jogo */
+    
+    /* Efeito opcional de brilho */
+    text-shadow: 3px 3px 0px #ff0000, -3px -3px 0px #0000ff;
+}
+
+.btn-sair {
+    position: absolute;
+    top: 850px;    /* Distância do topo */
+    left: 20px;   /* Distância da esquerda */
+    z-index: 20;  /* Garante que fique na frente do canvas e do título */
+    
+    /* Estilo Pixel Art */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    color: white;
+    background-color: #000;
+    border: 4px solid #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #555;
+    text-transform: uppercase;
+    transition: 0.1s;
+}
+
+.btn-sair:hover {
+    background-color: #ff0000; /* Vermelho para indicar saída */
+    box-shadow: 0px 0px 0px transparent;
+    transform: translate(4px, 4px); /* Efeito de botão apertado */
+}

@@ -13,46 +13,61 @@ let estrela2 = new Estrelas(1700, 300, 40, 40, './img/estrela.png.png')
 let estrela3 = new Estrelas(2000, 500, 40, 40, './img/estrela.png.png')
 
 let meuFoguete = new Foguete(100, 325, 80, 50, './img/rocket_001_bg.png')
+let meuFoguete2 = new Foguete(100, 450, 80, 50, './img/jogador2_00_bg.png')//pro jogador 2
 
 let t1 = new Texto()
-let t2 = new Texto()
+let t2 = new Texto()    
 let fase_txt = new Texto()
+let t1_p2 = new Texto() // Pontos P2
+let t2_p2 = new Texto() // Vidas P2
 
 // Sons removidos para evitar erros de 404
 let jogar = true
 let fase = 1
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'w' || e.key === 'ArrowUp') {
+    // Jogador 1 (Setas)
+    if (e.key === 'ArrowUp') {
         meuFoguete.dir = -10
-    } else if (e.key === 's' || e.key === 'ArrowDown') {
+    } else if (e.key === 'ArrowDown') {
         meuFoguete.dir = 10
+    }
+
+    // Jogador 2 (W e S)
+    if (e.key === 'w' || e.key === 'W') {
+        meuFoguete2.dir = -10
+    } else if (e.key === 's' || e.key === 'S') {
+        meuFoguete2.dir = 10
     }
 })
 
 document.addEventListener('keyup', (e) => {
-    if (e.key === 'w' || e.key === 'ArrowUp' || e.key === 's' || e.key === 'ArrowDown') {
+    // Para o Jogador 1
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         meuFoguete.dir = 0
+    }
+    // Para o Jogador 2
+    if (e.key === 'w' || e.key === 'W' || e.key === 's' || e.key === 'S') {
+        meuFoguete2.dir = 0
     }
 })
 
 function game_over() {
-    if (meuFoguete.vida <= 0) {
+    if (meuFoguete.vida <= 0 || meuFoguete2.vida <= 0) {
         jogar = false
     }
 }
-
 function ver_fase() { 
     if (meuFoguete.pontos > 100 && fase === 1) {
         fase = 2
-        meteoro1.vel = 8
-        meteoro2.vel = 8
-        meteoro3.vel = 8
-    } else if (meuFoguete.pontos > 200 && fase === 2) {
-        fase = 3
         meteoro1.vel = 10
         meteoro2.vel = 10
         meteoro3.vel = 10
+    } else if (meuFoguete.pontos > 200 && fase === 2) {
+        fase = 3
+        meteoro1.vel = 12
+        meteoro2.vel = 12
+        meteoro3.vel = 12
     }
 }
 
@@ -62,6 +77,7 @@ function colisao() {
         meteoro1.recomecar()
         meuFoguete.vida -= 1
     }
+    
     if (meuFoguete.colisao(meteoro2)) {
         meteoro2.recomecar()
         meuFoguete.vida -= 1
@@ -86,28 +102,70 @@ function colisao() {
     if (meuFoguete.colisao(estrela3)) {
         meuFoguete.pontos += 5
         estrela3.recomecar()
+
+
+    } //SEGUNDO JOGADOR
+    if (meuFoguete2.colisao(meteoro1)) {
+        meteoro1.recomecar()
+        meuFoguete2.vida -= 1
+    }
+    
+    if (meuFoguete2.colisao(meteoro2)) {
+        meteoro2.recomecar()
+        meuFoguete2.vida -= 1
+    }
+    if (meuFoguete2.colisao(meteoro3)) {
+        meteoro3.recomecar()
+        meuFoguete2.vida -= 1
+    }
+    if (meuFoguete2.colisao(meteoro4)) {
+        meteoro4.recomecar() 
+        meuFoguete2.vida -= 1
+    }
+
+    // Colisão com as Estrelas
+    if (meuFoguete2.colisao(estrela1)) {
+        meuFoguete2.pontos += 5
+        estrela1.recomecar()
+    }
+    if (meuFoguete2.colisao(estrela2)) {
+        meuFoguete2.pontos += 5
+        estrela2.recomecar()
+    }
+    if (meuFoguete2.colisao(estrela3)) {
+        meuFoguete2.pontos += 5
+        estrela3.recomecar()
     }
 } 
 
 function pontuacao() {
+    // Se o meteoro 1 passou da tela...
     if (meuFoguete.passou(meteoro1)) {
-        meuFoguete.pontos += 1
-        meteoro1.recomecar()
+        meuFoguete.pontos += 1  // P1 ganha ponto
+        meuFoguete2.pontos += 1 // P2 ganha ponto (porque ele também sobreviveu)
+        meteoro1.recomecar()    // reseta o meteoro para os dois
     }
+
     if (meuFoguete.passou(meteoro2)) {
         meuFoguete.pontos += 1
+        meuFoguete2.pontos += 1
         meteoro2.recomecar()
     }
+
     if (meuFoguete.passou(meteoro3)) {
         meuFoguete.pontos += 1
+        meuFoguete2.pontos += 1
         meteoro3.recomecar()
     }
+
     if (meuFoguete.passou(meteoro4)) {
         meuFoguete.pontos += 1
-        meteoro4.recomecar() // Corrigido aqui
+        meuFoguete2.pontos += 1
+        meteoro4.recomecar()
     }
 }
 
+// Substitua a função desenha() inteira
 function desenha() {
     if (jogar) {
         estrela1.desenhar()
@@ -118,13 +176,26 @@ function desenha() {
         meteoro3.desenhar()
         meteoro4.desenhar()
         meuFoguete.desenhar()
+        meuFoguete2.desenhar()
         
-        t1.desenhar('Pontos: ' + meuFoguete.pontos, 1000, 40, 'yellow', '18px "Press Start 2P"'); //essa fonte vem de fora, por isso o import la no css
-        t2.desenhar('Vidas: ' + meuFoguete.vida, 40, 40, 'red', '18px "Press Start 2P"');
+        // --- HUD JOGADOR 1 (Topo) ---
+        t1.desenhar('Pontos P1: ' + meuFoguete.pontos, 950, 40, 'yellow', '18px "Press Start 2P"');
+        t2.desenhar('Vidas P1: ' + meuFoguete.vida, 40, 40, 'red', '18px "Press Start 2P"');
         fase_txt.desenhar('Fase: ' + fase, 550, 40, 'white', '18px "Press Start 2P"');
+
+        // --- HUD JOGADOR 2 (Embaixo - y=670) ---
+        // Usando cores diferentes (lightblue e orange) para dar destaque
+        t1_p2.desenhar('Pontos P2: ' + meuFoguete2.pontos, 950, 670, 'lightblue', '18px "Press Start 2P"');
+        t2_p2.desenhar('Vidas P2: ' + meuFoguete2.vida, 40, 670, 'orange', '18px "Press Start 2P"');
+
     } else {
-        t1.desenhar('GAME OVER', 450, 350, 'yellow', '40px "Press Start 2P"');
-        t2.desenhar('Pontuação Final: ' + meuFoguete.pontos, 480, 400, 'white', '16px "Press Start 2P"');
+        // --- TELA DE GAME OVER ---
+        // Centralizado na tela (x=400, y=350)
+        t1.desenhar('GAME OVER', 400, 350, 'yellow', '50px "Press Start 2P"');
+        
+        // Mostra a pontuação final de ambos
+        t2.desenhar('Pontuação P1: ' + meuFoguete.pontos, 480, 420, 'white', '16px "Press Start 2P"');
+        t1_p2.desenhar('Pontuação P2: ' + meuFoguete2.pontos, 480, 450, 'white', '16px "Press Start 2P"');
     }
  }
 
@@ -132,7 +203,9 @@ function desenha() {
 function atualiza() {
     if (jogar) {
         meuFoguete.movimentar()
+        meuFoguete2.movimentar()
         meuFoguete.animar('rocket_00')
+        // meuFoguete2.animar('rocket_00')
         meteoro1.movimentar()
         meteoro2.movimentar()
         meteoro3.movimentar()

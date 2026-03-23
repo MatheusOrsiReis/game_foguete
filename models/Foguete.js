@@ -22,7 +22,7 @@ class Obj{
 
 class Foguete extends Obj{
     dir = 0
-    vida = 3 // Conforme você pediu
+    vida = 3 
     pontos = 0
     frame = 1
     tempo = 0
@@ -66,7 +66,7 @@ class Foguete extends Obj{
 }
 
 class Meteoro extends Obj{
-    vel = 6
+    vel = 8
     recomecar(){
         this.x = 1300
         this.y = Math.floor(Math.random() * (650 - 50) + 50)

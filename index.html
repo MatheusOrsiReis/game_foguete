@@ -2,17 +2,21 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <script src="./models/Foguete.js" defer></script>
-    <script src="./index.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
-    <link rel="icon" type="image/png" href="./img/incon.png">
-    <title>Space Adventure</title>
+    <link rel="stylesheet" href="./home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Space Adventure - Menu</title>
 </head>
 <body>
-    <canvas id="des" width="1200" height="700">
-        <h2>Seu navegador não suporta gráficos</h2>
-    </canvas>
+    <div class="game-container">
+        <h1 class="main-title">SPACE ADVENTURE</h1>
+        
+        <div id="main-menu">
+            <div class="menu-buttons">
+                <button onclick="window.location.href='jogo.html'">JOGAR</button>
+                <button onclick="window.location.href='instrucoes.html'">INSTRUÇÕES</button>
+                <button onclick="window.location.href='dev.html'">DESENVOLVEDOR</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
