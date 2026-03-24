@@ -7,13 +7,24 @@ let meteoro3 = new Meteoro(1700, 400, 80, 50, './img/meteoro.png')
 let meteoro4 = new Meteoro(1600, 250, 80, 50, './img/meteoro.png')
 
 
-// Substitua as linhas das 'estrada' ou 'estrela1, 2, 3' por esta:
 let estrela1 = new Estrelas(1400, 100, 40, 40, './img/estrela.png.png')
 let estrela2 = new Estrelas(1700, 300, 40, 40, './img/estrela.png.png')
 let estrela3 = new Estrelas(2000, 500, 40, 40, './img/estrela.png.png')
 
 let meuFoguete = new Foguete(100, 325, 80, 50, './img/rocket_001_bg.png')
 let meuFoguete2 = new Foguete(100, 450, 80, 50, './img/jogador2_00_bg.png')//pro jogador 2
+
+//som
+const somColeta = new Audio('./audios/coleta_estrelas.mp3');
+const somExplosao = new Audio('./audios/colisao_meteoro.mp3');
+let audioIniciado = false; //evita que o som tente tocar várias vezes antes do usuário interagir
+// Som Contínuo (Motor)
+const somMotor = new Audio('./audios/motor_foguete.mp3'); 
+somMotor.loop = true;   // Faz o barulho do motor repetir sem parar
+somMotor.volume = 1.0;  
+const trilhaSonora = new Audio('./audios/trilha_jogo.mp3');
+trilhaSonora.loop = true;   // a música recomeça sozinha
+trilhaSonora.volume = 0.4;  // volume 40% 
 
 let t1 = new Texto()
 let t2 = new Texto()    
@@ -23,7 +34,6 @@ let t2_p2 = new Texto() // Vidas P2
 
 let vencedor = ""; // Armazena o texto de quem ganhou
 
-// Sons removidos para evitar erros de 404
 let jogar = true
 let fase = 1
 
@@ -56,13 +66,13 @@ document.addEventListener('keyup', (e) => {
 
 function game_over() {
     // 1. Checa se o Jogador 1 atingiu 500 pontos ou o Jogador 2 morreu
-    if (meuFoguete.pontos >= 500 || meuFoguete2.vida <= 0) {
+    if (meuFoguete.pontos >= 300 || meuFoguete2.vida <= 0) {
         jogar = false;
         vencedor = "JOGADOR 1 VENCEU!";
     }
     
     // 2. Checa se o Jogador 2 atingiu 500 pontos ou o Jogador 1 morreu
-    if (meuFoguete2.pontos >= 500 || meuFoguete.vida <= 0) {
+    if (meuFoguete2.pontos >= 300 || meuFoguete.vida <= 0) {
         jogar = false;
         vencedor = "JOGADOR 2 VENCEU!";
     }
@@ -82,71 +92,60 @@ function ver_fase() {
 }
 
 function colisao() {
+    // --- JOGADOR 1 ---
     // Colisão com os Meteoros
-    if (meuFoguete.colisao(meteoro1)) {
-        meteoro1.recomecar()
-        meuFoguete.vida -= 1
+    if (meuFoguete.colisao(meteoro1) || meuFoguete.colisao(meteoro2) || 
+        meuFoguete.colisao(meteoro3) || meuFoguete.colisao(meteoro4)) {
+        
+        somExplosao.currentTime = 0;
+        somExplosao.play();
+        
+        if (meuFoguete.colisao(meteoro1)) meteoro1.recomecar();
+        if (meuFoguete.colisao(meteoro2)) meteoro2.recomecar();
+        if (meuFoguete.colisao(meteoro3)) meteoro3.recomecar();
+        if (meuFoguete.colisao(meteoro4)) meteoro4.recomecar();
+        
+        meuFoguete.vida -= 1;
     }
     
-    if (meuFoguete.colisao(meteoro2)) {
-        meteoro2.recomecar()
-        meuFoguete.vida -= 1
-    }
-    if (meuFoguete.colisao(meteoro3)) {
-        meteoro3.recomecar()
-        meuFoguete.vida -= 1
-    }
-    if (meuFoguete.colisao(meteoro4)) {
-        meteoro4.recomecar() 
-        meuFoguete.vida -= 1
-    }
     // Colisão com as Estrelas
-    if (meuFoguete.colisao(estrela1)) {
-        meuFoguete.pontos += 5
-        estrela1.recomecar()
-    }
-    if (meuFoguete.colisao(estrela2)) {
-        meuFoguete.pontos += 5
-        estrela2.recomecar()
-    }
-    if (meuFoguete.colisao(estrela3)) {
-        meuFoguete.pontos += 5
-        estrela3.recomecar()
-
-
-    } //SEGUNDO JOGADOR
-    if (meuFoguete2.colisao(meteoro1)) {
-        meteoro1.recomecar()
-        meuFoguete2.vida -= 1
-    }
-    
-    if (meuFoguete2.colisao(meteoro2)) {
-        meteoro2.recomecar()
-        meuFoguete2.vida -= 1
-    }
-    if (meuFoguete2.colisao(meteoro3)) {
-        meteoro3.recomecar()
-        meuFoguete2.vida -= 1
-    }
-    if (meuFoguete2.colisao(meteoro4)) {
-        meteoro4.recomecar() 
-        meuFoguete2.vida -= 1
+    if (meuFoguete.colisao(estrela1) || meuFoguete.colisao(estrela2) || meuFoguete.colisao(estrela3)) {
+        somColeta.currentTime = 0;
+        somColeta.play();
+        
+        if (meuFoguete.colisao(estrela1)) estrela1.recomecar();
+        if (meuFoguete.colisao(estrela2)) estrela2.recomecar();
+        if (meuFoguete.colisao(estrela3)) estrela3.recomecar();
+        
+        meuFoguete.pontos += 5;
     }
 
-    // Colisão com as Estrelas
-    if (meuFoguete2.colisao(estrela1)) {
-        meuFoguete2.pontos += 5
-        estrela1.recomecar()
+    // --- JOGADOR 2 ---
+    if (meuFoguete2.colisao(meteoro1) || meuFoguete2.colisao(meteoro2) || 
+        meuFoguete2.colisao(meteoro3) || meuFoguete2.colisao(meteoro4)) {
+        
+        somExplosao.currentTime = 0;
+        somExplosao.play();
+        
+        if (meuFoguete2.colisao(meteoro1)) meteoro1.recomecar();
+        if (meuFoguete2.colisao(meteoro2)) meteoro2.recomecar();
+        if (meuFoguete2.colisao(meteoro3)) meteoro3.recomecar();
+        if (meuFoguete2.colisao(meteoro4)) meteoro4.recomecar();
+        
+        meuFoguete2.vida -= 1;
     }
-    if (meuFoguete2.colisao(estrela2)) {
-        meuFoguete2.pontos += 5
-        estrela2.recomecar()
+
+    if (meuFoguete2.colisao(estrela1) || meuFoguete2.colisao(estrela2) || meuFoguete2.colisao(estrela3)) {
+        somColeta.currentTime = 0;
+        somColeta.play();
+        
+        if (meuFoguete2.colisao(estrela1)) estrela1.recomecar();
+        if (meuFoguete2.colisao(estrela2)) estrela2.recomecar();
+        if (meuFoguete2.colisao(estrela3)) estrela3.recomecar();
+        
+        meuFoguete2.pontos += 5;
     }
-    if (meuFoguete2.colisao(estrela3)) {
-        meuFoguete2.pontos += 5
-        estrela3.recomecar()
-    }
-} 
+}
 
 function pontuacao() {
     // Se o meteoro 1 passou da tela...
@@ -214,22 +213,34 @@ function desenha() {
 
 function atualiza() {
     if (jogar) {
-        meuFoguete.movimentar()
-        meuFoguete2.movimentar()
-        meuFoguete.animar('rocket_00')
-        // meuFoguete2.animar('rocket_00')
-        meteoro1.movimentar()
-        meteoro2.movimentar()
-        meteoro3.movimentar()
-        meteoro4.movimentar()
-        estrela1.mov_est()
-        estrela2.mov_est()
-        estrela3.mov_est()
+        // --- LIGA OS SONS SE ESTIVEREM PAUSADOS ---
+        if (somMotor.paused) somMotor.play();
+        if (trilhaSonora.paused) trilhaSonora.play();
+        meuFoguete.movimentar();
+        meuFoguete2.movimentar();
+        meuFoguete.animar('rocket_00');
+
+        meteoro1.movimentar();
+        meteoro2.movimentar();
+        meteoro3.movimentar();
+        meteoro4.movimentar();
         
-        colisao()
-        pontuacao()
-        ver_fase()
-        game_over()
+        estrela1.mov_est();
+        estrela2.mov_est();
+        estrela3.mov_est();
+        
+        colisao();
+        pontuacao();
+        ver_fase();
+        game_over();
+
+    } else {
+        // --- DESLIGA TUDO NO GAME OVER ---
+        somMotor.pause();
+        somMotor.currentTime = 0;
+        
+        trilhaSonora.pause();
+        trilhaSonora.currentTime = 0; // faz a música voltar pro início para a próxima partida
     }
 }
 
