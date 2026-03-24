@@ -12,7 +12,7 @@ let estrela2 = new Estrelas(1700, 300, 40, 40, './img/estrela.png.png')
 let estrela3 = new Estrelas(2000, 500, 40, 40, './img/estrela.png.png')
 
 let meuFoguete = new Foguete(100, 325, 80, 50, './img/rocket_001_bg.png')
-let meuFoguete2 = new Foguete(100, 450, 80, 50, './img/jogador2_00_bg.png')//pro jogador 2
+let meuFoguete2 = new Foguete(100, 450, 80, 50, './img/jogador2_001_bg.png')//pro jogador 2
 
 //som
 const somColeta = new Audio('./audios/coleta_estrelas.mp3');
@@ -24,7 +24,7 @@ somMotor.loop = true;   // Faz o barulho do motor repetir sem parar
 somMotor.volume = 1.0;  
 const trilhaSonora = new Audio('./audios/trilha_jogo.mp3');
 trilhaSonora.loop = true;   // a música recomeça sozinha
-trilhaSonora.volume = 0.4;  // volume 40% 
+trilhaSonora.volume = 0.6;  // volume 60% 
 
 let t1 = new Texto()
 let t2 = new Texto()    
@@ -174,7 +174,7 @@ function pontuacao() {
     }
 }
 
-// Substitua a função desenha() inteira
+
 function desenha() {
     if (jogar) {
         estrela1.desenhar()
@@ -198,15 +198,18 @@ function desenha() {
 
     } else {
         // --- TELA DE VITÓRIA / GAME OVER ---
-        // Exibe o título principal do fim de jogo
         t1.desenhar('FIM DE JOGO', 350, 300, 'yellow', '50px "Press Start 2P"');
         
         // Exibe quem venceu 
         t2.desenhar(vencedor, 330, 400, 'white', '25px "Press Start 2P"');
         
-        // Mostra a pontuação final de ambos para comparação
+        // Mostra a pontuação final de ambos
         t1_p2.desenhar('P1: ' + meuFoguete.pontos + ' pts', 480, 460, 'yellow', '16px "Press Start 2P"');
         t2_p2.desenhar('P2: ' + meuFoguete2.pontos + ' pts', 480, 490, 'lightblue', '16px "Press Start 2P"');
+
+        // --- MENSAGEM PARA REINICIAR ---
+        // Usei o fase_txt para desenhar a mensagem na parte de baixo
+        fase_txt.desenhar('PRESSIONE F5 PARA REINICIAR', 320, 580, 'white', '15px "Press Start 2P"');
     }
 }
 
@@ -219,6 +222,7 @@ function atualiza() {
         meuFoguete.movimentar();
         meuFoguete2.movimentar();
         meuFoguete.animar('rocket_00');
+        meuFoguete2.animar('jogador2_00');
 
         meteoro1.movimentar();
         meteoro2.movimentar();
