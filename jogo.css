@@ -22,8 +22,8 @@ canvas {
     /* Borda opcional para ver onde o jogo termina */
     border: 1px solid #333; 
     
-   /* Imagem do fundo da galaxia */
-    background-image: url('./img/galaxiaanimada.gif'); 
+   /* Imagem do fundo da galaxia
+    background-image: url('./img/galaxiaanimada.gif');  */
     
     /* Faz a galáxia aparecer inteira sem esticar */
     background-size: 100% 100%;

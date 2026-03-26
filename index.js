@@ -1,6 +1,9 @@
 let des = document.getElementById('des').getContext('2d')
 
 // --- OBJETOS ---
+let fundo = new Image()
+fundo.src = './img/galaxiaanimada.gif'
+
 let meteoro1 = new Meteoro(1200, 325, 80, 50, './img/meteoro.png')
 let meteoro2 = new Meteoro(1500, 125, 80, 50, './img/meteoro.png')
 let meteoro3 = new Meteoro(1700, 400, 80, 50, './img/meteoro.png')
@@ -18,6 +21,7 @@ let meuFoguete2 = new Foguete(100, 450, 80, 50, './img/jogador2_001_bg.png')//pr
 const somColeta = new Audio('./audios/coleta_estrelas.mp3');
 const somExplosao = new Audio('./audios/colisao_meteoro.mp3');
 let audioIniciado = false; //evita que o som tente tocar várias vezes antes do usuário interagir
+
 // Som Contínuo (Motor)
 const somMotor = new Audio('./audios/motor_foguete.mp3'); 
 somMotor.loop = true;   // Faz o barulho do motor repetir sem parar
@@ -77,14 +81,17 @@ function game_over() {
         vencedor = "JOGADOR 2 VENCEU!";
     }
 }
+
 function ver_fase() { 
-    if (meuFoguete.pontos > 100 && fase === 1) {
+    if (meuFoguete.pontos > 10 && fase === 1) {
         fase = 2
+        fundo.src = './img/fundofase2.gif'
         meteoro1.vel = 10
         meteoro2.vel = 10
         meteoro3.vel = 10
-    } else if (meuFoguete.pontos > 200 && fase === 2) {
+    } else if (meuFoguete.pontos > 20 && fase === 2) {
         fase = 3
+        fundo.src = './img/fundofinalinicial.jpg'
         meteoro1.vel = 12
         meteoro2.vel = 12
         meteoro3.vel = 12
@@ -176,6 +183,7 @@ function pontuacao() {
 
 
 function desenha() {
+    des.drawImage(fundo, 0, 0, 1200, 700)
     if (jogar) {
         estrela1.desenhar()
         estrela2.desenhar()
