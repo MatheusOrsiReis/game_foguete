@@ -83,13 +83,13 @@ function game_over() {
 }
 
 function ver_fase() { 
-    if (meuFoguete.pontos > 10 && fase === 1) {
+    if (meuFoguete.pontos > 100 && fase === 1) {
         fase = 2
         fundo.src = './img/fundofase2.gif'
         meteoro1.vel = 10
         meteoro2.vel = 10
         meteoro3.vel = 10
-    } else if (meuFoguete.pontos > 20 && fase === 2) {
+    } else if (meuFoguete.pontos > 200 && fase === 2) {
         fase = 3
         fundo.src = './img/fundofinalinicial.jpg'
         meteoro1.vel = 12
