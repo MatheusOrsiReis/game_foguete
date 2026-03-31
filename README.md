@@ -1,61 +1,81 @@
-SPACE ADVENTURE
+# 🚀 Space Race 2P - Desafio Estelar
 
-Um jogo de corrida espacial infinita desenvolvido com HTML5 Canvas e JavaScript. O foco é a competição local entre dois jogadores para ver quem sobrevive mais tempo e coleta mais estrelas enquanto desvia de meteoros.
+**Desenvolvedor:** Matheus Orsi Reis  
+**Product Owner:** [Insira o Nome do Seu Professor Aqui]
 
-🚀 Funcionalidades
-Modo Local para 2 Jogadores: Competam simultaneamente no mesmo teclado.
+![Banner do Jogo](https://game-foguete.vercel.app/img/fundo1.png)
 
-Sistema de Fases: O jogo aumenta a dificuldade e muda o cenário de fundo automaticamente ao atingir certas pontuações (10 e 200 pontos).
+---
 
-Elementos Interativos:
+## 📖 1. Visão Geral do Sistema
 
-Estrelas: Coletar uma estrela garante +5 pontos.
+### Descrição
+O **Space Race 2P** é um software de entretenimento do tipo game desenvolvido para navegadores modernos. Utilizando a tecnologia **HTML5 Canvas**, o jogo oferece uma experiência de corrida e sobrevivência com física de colisão em tempo real e suporte a dois jogadores.
 
-Meteoros: Colidir com um meteoro remove 1 vida.
+### Objetivo e Tema
+O tema escolhido é a **Exploração Espacial**. O objetivo principal do jogador é pilotar um foguete em uma zona de asteroides, desviando de obstáculos (Meteoros) e coletando recursos (Estrelas). O jogo possui progressão de dificuldade automática conforme a pontuação aumenta.
 
-Efeitos Sonoros: Trilhas sonoras em loop, sons de motor, explosões e coleta de itens.
+### 🎮 Instruções de Jogabilidade (Manual)
+O jogo é controlado inteiramente pelo teclado:
+* **Jogador 1 (Esquerda):** Teclas **W** (Subir) e **S** (Descer).
+* **Jogador 2 (Direita):** Setas do teclado **UP** (Subir) e **DOWN** (Descer).
 
-Condição de Vitória: Vence quem atingir 300 pontos primeiro ou se o oponente perder todas as vidas.
+**Elementos do Jogo:**
+* ⭐ **Estrela:** Item coletável que soma **5 pontos** ao placar individual.
+* ☄️ **Meteoro:** Obstáculo hostil. A colisão resulta na perda de **1 vida**.
+* 🚀 **Sobrevivência:** Cada meteoro que atravessa a tela sem atingir o jogador soma **1 ponto** de bônus.
 
-🎮 Controles
-Jogador 1 (Foguete 1)
-Seta para Cima: Mover para cima.
+### ⚙️ Especificações Técnicas (Regras de Negócio)
+* **Sistema de Vidas (RF02):** Cada jogador inicia com 3 vidas. O jogo termina se as vidas chegarem a 0.
+* **Progressão de Fases (RF05/RN01):**
+    * **Fase 1 (Cinturão de Órion):** Velocidade base dos meteoros (0 a 10 pontos).
+    * **Fase 2 (Nebulosa de Andrômeda):** Velocidade aumentada para 10 (10 a 200 pontos).
+    * **Fase 3 (Buraco Negro):** Velocidade máxima 12 + Mudança visual de cenário (200 a 300 pontos).
+* **Vitória (RN03):** O jogador vence ao atingir a meta de **300 pontos** com pelo menos 1 vida restante.
 
-Seta para Baixo: Mover para baixo.
+### 👨‍💻 Créditos e "Sobre" (RF06)
+* **Desenvolvedor:** Matheus Orsi Reis
+* **Product Owner (Orientador):** [Nome do Professor]
+* **Tecnologias:** JavaScript ES6+, HTML5 Canvas.
 
-Jogador 2 (Foguete 2)
-Tecla W: Mover para cima.
+### 🔗 Link de Produção
+[Acesse o jogo aqui: game-foguete.vercel.app](https://game-foguete.vercel.app/index.html)
 
-Tecla S: Mover para baixo.
+---
 
-🛠️ Estrutura do Código
-O projeto segue uma estrutura baseada em loops de renderização e atualização:
+## 💻 2. Instruções de Instalação e Execução
 
-main(): O coração do jogo, utiliza requestAnimationFrame para manter 60 FPS.
+Para rodar o projeto localmente em sua máquina, siga os passos abaixo:
 
-desenha(): Gerencia a renderização do fundo, dos personagens, obstáculos e da interface (HUD).
+### 1. Clonagem do Repositório
+```bash
 
-atualiza(): Processa as colisões, movimentação, troca de fases e verificação de Game Over.
+git clone [https://github.com/MatheusOrsiReis/game_foguete.git](https://github.com/MatheusOrsiReis/game_foguete.git)
 
-ver_fase(): Monitora a pontuação para realizar a troca dinâmica do src da imagem de fundo e aumentar a velocidade dos obstáculos.
+2. Instalação de Dependências
+Este projeto foi desenvolvido utilizando JavaScript Vanilla (ES6+), portanto não possui dependências externas. Ele roda nativamente em qualquer navegador moderno.
 
-📂 Pré-requisitos de Arquivos
-Para que o jogo funcione corretamente, a estrutura de pastas deve conter:
+3. Execução do Projeto
+Navegue até a pasta do projeto.
 
-Plaintext
-/
-├── index.html
-├── script.js (este código)
-├── img/
-│   ├── galaxiaanimada.gif
-│   ├── galaxia.png
-│   ├── fundofinalinicial.jpg
-│   ├── meteoro.png
-│   ├── estrela.png.png
-│   ├── rocket_001_bg.png
-│   └── jogador2_001_bg.png
-└── audios/
-    ├── coleta_estrelas.mp3
-    ├── colisao_meteoro.mp3
-    ├── motor_foguete.mp3
-    └── trilha_jogo.mp3
+Abra o arquivo index.html diretamente em seu navegador.
+
+Recomendação: Utilize a extensão Live Server no VS Code.
+
+🛠️ Requisitos Não Funcionais (RNF)
+RNF01 (Tecnologia): Desenvolvido em JavaScript puro (sem transpilação).
+
+RNF02 (Portabilidade): Execução direta via Browser (HTML5).
+
+RNF03 (Usabilidade): Interface projetada para resolução 1920x1080 px.
+
+RNF04 (Desempenho): Taxa de atualização estável em 60 FPS via requestAnimationFrame.
+
+📊 Modelagem do Sistema (Documentação UML)
+O projeto segue a modelagem orientada a objetos conforme os diagramas abaixo:
+
+Diagrama de Casos de Uso: Representa as interações do jogador com o menu e gameplay.
+
+Diagrama de Classes: Estrutura de herança a partir da classe base Obj.
+
+Diagrama de Sequência: Demonstra o ciclo de atualização e detecção de colisão.
