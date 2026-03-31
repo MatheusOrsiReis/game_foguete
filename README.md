@@ -1,81 +1,127 @@
 # 🚀 Space Race 2P - Desafio Estelar
 
 **Desenvolvedor:** Matheus Orsi Reis  
-**Product Owner:** [Insira o Nome do Seu Professor Aqui]
-
-![Banner do Jogo](https://game-foguete.vercel.app/img/fundo1.png)
+**Product Owner:** Carlos Roberto da Silva Filho
 
 ---
 
 ## 📖 1. Visão Geral do Sistema
 
 ### Descrição
-O **Space Race 2P** é um software de entretenimento do tipo game desenvolvido para navegadores modernos. Utilizando a tecnologia **HTML5 Canvas**, o jogo oferece uma experiência de corrida e sobrevivência com física de colisão em tempo real e suporte a dois jogadores.
+O **Space Race 2P** é um software de entretenimento do tipo game desenvolvido para navegadores modernos. Utilizando a tecnologia **HTML5 Canvas**, o jogo oferece uma experiência de corrida e sobrevivência com física de colisão em tempo real e suporte a dois jogadores simultâneos.
 
 ### Objetivo e Tema
 O tema escolhido é a **Exploração Espacial**. O objetivo principal do jogador é pilotar um foguete em uma zona de asteroides, desviando de obstáculos (Meteoros) e coletando recursos (Estrelas). O jogo possui progressão de dificuldade automática conforme a pontuação aumenta.
 
 ### 🎮 Instruções de Jogabilidade (Manual)
-O jogo é controlado inteiramente pelo teclado:
 * **Jogador 1 (Esquerda):** Teclas **W** (Subir) e **S** (Descer).
 * **Jogador 2 (Direita):** Setas do teclado **UP** (Subir) e **DOWN** (Descer).
-
-**Elementos do Jogo:**
-* ⭐ **Estrela:** Item coletável que soma **5 pontos** ao placar individual.
-* ☄️ **Meteoro:** Obstáculo hostil. A colisão resulta na perda de **1 vida**.
-* 🚀 **Sobrevivência:** Cada meteoro que atravessa a tela sem atingir o jogador soma **1 ponto** de bônus.
-
-### ⚙️ Especificações Técnicas (Regras de Negócio)
-* **Sistema de Vidas (RF02):** Cada jogador inicia com 3 vidas. O jogo termina se as vidas chegarem a 0.
-* **Progressão de Fases (RF05/RN01):**
-    * **Fase 1 (Cinturão de Órion):** Velocidade base dos meteoros (0 a 10 pontos).
-    * **Fase 2 (Nebulosa de Andrômeda):** Velocidade aumentada para 10 (10 a 200 pontos).
-    * **Fase 3 (Buraco Negro):** Velocidade máxima 12 + Mudança visual de cenário (200 a 300 pontos).
-* **Vitória (RN03):** O jogador vence ao atingir a meta de **300 pontos** com pelo menos 1 vida restante.
-
-### 👨‍💻 Créditos e "Sobre" (RF06)
-* **Desenvolvedor:** Matheus Orsi Reis
-* **Product Owner (Orientador):** [Nome do Professor]
-* **Tecnologias:** JavaScript ES6+, HTML5 Canvas.
-
-### 🔗 Link de Produção
-[Acesse o jogo aqui: game-foguete.vercel.app](https://game-foguete.vercel.app/index.html)
+* **Coletáveis (Estrela):** Soma **5 pontos** ao placar.
+* **Obstáculos (Meteoro):** Reduz **1 vida** ao colidir.
 
 ---
 
-## 💻 2. Instruções de Instalação e Execução
+## ⚙️ 2. Especificações Técnicas e Regras de Negócio
 
-Para rodar o projeto localmente em sua máquina, siga os passos abaixo:
+### A. Requisitos Funcionais (RF)
+* **RF01 - Movimentação:** Controle dos foguetes no eixo Y (Vertical) via teclado, capturado por eventos de 'keydown'.
+* **RF02 - Sistema de Vidas:** Jogadores iniciam com 3 vidas; a detecção de colisão decrementa este valor na classe Foguete.
+* **RF03 - Pontuação:** Placar dinâmico que contabiliza estrelas (+5) e sobrevivência a meteoros (+1).
+* **RF04 - Coletáveis:** Classe 'Estrela' gera itens aleatórios que bonificam o jogador ao contato.
+* **RF05 - Progressão de Fases:** Transição automática entre 3 níveis baseada na pontuação (100, 200 e 300 pontos).
+* **RF06 - Interface (Telas):** Implementação de Menu Inicial, HUD de Jogo, Tela "Sobre" e Telas de Vitória/Derrota.
 
-### 1. Clonagem do Repositório
-```bash
+### B. Regras de Negócio (RN)
+* **RN01 - Dificuldade Progressiva:** A cada fase, a velocidade dos meteoros aumenta (vel: 8, 10 e 12) via função 'ver_fase()'.
+* **RN02 - Troca de Cenário:** O background do jogo é alterado dinamicamente para indicar a progressão entre as 3 fases.
+* **RN03 - Condição de Vitória:** O jogador vence ao atingir 300 pontos com pelo menos 1 vida restante.
+* **RN04 - Manual de Instruções:** Instruções de comando, sistema de vidas e pontuação exibidas na tela de menu.
 
-git clone [https://github.com/MatheusOrsiReis/game_foguete.git](https://github.com/MatheusOrsiReis/game_foguete.git)
+### C. Requisitos Não Funcionais (RNF)
+* **RNF01 - Tecnologia:** Desenvolvido em JavaScript puro (ES6+), sem frameworks externos.
+* **RNF02 - Portabilidade:** Execução direta no navegador através da API HTML5 Canvas.
+* **RNF03 - Usabilidade:** Layout fixo otimizado para a resolução de 1920 x 1080 px.
+* **RNF04 - Desempenho:** Taxa de atualização estável de 60 FPS garantida pelo método 'requestAnimationFrame'.
 
-2. Instalação de Dependências
-Este projeto foi desenvolvido utilizando JavaScript Vanilla (ES6+), portanto não possui dependências externas. Ele roda nativamente em qualquer navegador moderno.
+---
 
-3. Execução do Projeto
-Navegue até a pasta do projeto.
+## 💻 3. Instruções de Instalação e Execução
 
-Abra o arquivo index.html diretamente em seu navegador.
+1. **Clonagem do Repositório:**
+   ```bash
+   git clone [https://github.com/MatheusOrsiReis/game_foguete.git](https://github.com/MatheusOrsiReis/game_foguete.git)
 
-Recomendação: Utilize a extensão Live Server no VS Code.
+O Gemini disse
+Aqui está o conteúdo completo e definitivo para o seu arquivo README.md, formatado apenas como texto simples dentro do bloco de código para facilitar a sua cópia.
 
-🛠️ Requisitos Não Funcionais (RNF)
-RNF01 (Tecnologia): Desenvolvido em JavaScript puro (sem transpilação).
+Basta copiar tudo o que está abaixo:
 
-RNF02 (Portabilidade): Execução direta via Browser (HTML5).
+Markdown
+# 🚀 Space Race 2P - Desafio Estelar
 
-RNF03 (Usabilidade): Interface projetada para resolução 1920x1080 px.
+**Desenvolvedor:** Matheus Orsi Reis  
+**Product Owner:** [Insira o Nome do Seu Professor Aqui]
 
-RNF04 (Desempenho): Taxa de atualização estável em 60 FPS via requestAnimationFrame.
+---
 
-📊 Modelagem do Sistema (Documentação UML)
-O projeto segue a modelagem orientada a objetos conforme os diagramas abaixo:
+## 📖 1. Visão Geral do Sistema
 
-Diagrama de Casos de Uso: Representa as interações do jogador com o menu e gameplay.
+### Descrição
+O **Space Race 2P** é um software de entretenimento do tipo game desenvolvido para navegadores modernos. Utilizando a tecnologia **HTML5 Canvas**, o jogo oferece uma experiência de corrida e sobrevivência com física de colisão em tempo real e suporte a dois jogadores simultâneos.
 
-Diagrama de Classes: Estrutura de herança a partir da classe base Obj.
+### Objetivo e Tema
+O tema escolhido é a **Exploração Espacial**. O objetivo principal do jogador é pilotar um foguete em uma zona de asteroides, desviando de obstáculos (Meteoros) e coletando recursos (Estrelas). O jogo possui progressão de dificuldade automática conforme a pontuação aumenta.
 
-Diagrama de Sequência: Demonstra o ciclo de atualização e detecção de colisão.
+### 🎮 Instruções de Jogabilidade (Manual)
+* **Jogador 1 (Esquerda):** Teclas **W** (Subir) e **S** (Descer).
+* **Jogador 2 (Direita):** Setas do teclado **UP** (Subir) e **DOWN** (Descer).
+* **Coletáveis (Estrela):** Soma **5 pontos** ao placar.
+* **Obstáculos (Meteoro):** Reduz **1 vida** ao colidir.
+
+---
+
+## ⚙️ 2. Especificações Técnicas e Regras de Negócio
+
+### A. Requisitos Funcionais (RF)
+* **RF01 - Movimentação:** Controle dos foguetes no eixo Y (Vertical) via teclado, capturado por eventos de 'keydown'.
+* **RF02 - Sistema de Vidas:** Jogadores iniciam com 3 vidas; a detecção de colisão decrementa este valor na classe Foguete.
+* **RF03 - Pontuação:** Placar dinâmico que contabiliza estrelas (+5) e sobrevivência a meteoros (+1).
+* **RF04 - Coletáveis:** Classe 'Estrela' gera itens aleatórios que bonificam o jogador ao contato.
+* **RF05 - Progressão de Fases:** Transição automática entre 3 níveis baseada na pontuação (0, 100 e 200 pontos).
+* **RF06 - Interface (Telas):** Implementação de Menu Inicial, HUD de Jogo, Tela "Sobre" e Telas de Vitória/Derrota.
+
+### B. Regras de Negócio (RN)
+* **RN01 - Dificuldade Progressiva:** A cada fase, a velocidade dos meteoros aumenta (vel: 8, 10 e 12) via função 'ver_fase()'.
+* **RN02 - Troca de Cenário:** O background do jogo é alterado dinamicamente para indicar a progressão entre as 3 fases.
+* **RN03 - Condição de Vitória:** O jogador vence ao atingir 300 pontos com pelo menos 1 vida restante.
+* **RN04 - Manual de Instruções:** Instruções de comando, sistema de vidas e pontuação exibidas na tela de menu.
+
+### C. Requisitos Não Funcionais (RNF)
+* **RNF01 - Tecnologia:** Desenvolvido em JavaScript puro (ES6+), sem frameworks externos.
+* **RNF02 - Portabilidade:** Execução direta no navegador através da API HTML5 Canvas.
+* **RNF03 - Usabilidade:** Layout fixo otimizado para a resolução de 1920 x 1080 px.
+* **RNF04 - Desempenho:** Taxa de atualização estável de 60 FPS garantida pelo método 'requestAnimationFrame'.
+
+---
+
+## 💻 3. Instruções de Instalação e Execução
+
+1. **Clonagem do Repositório:**
+   ```bash
+   git clone [https://github.com/MatheusOrsiReis/game_foguete.git](https://github.com/MatheusOrsiReis/game_foguete.git)
+   
+Execução:
+Abra o arquivo index.html diretamente em seu navegador ou utilize a extensão Live Server no VS Code.
+
+📊 4. Modelagem e Documentação UML
+O projeto segue a modelagem orientada a objetos com a seguinte documentação inclusa:
+
+Diagrama de Casos de Uso: Representação das interações do Ator (Jogador) com as interfaces.
+
+Diagrama de Classes: Estrutura de herança com a classe pai 'Obj' e classes filhas 'Foguete', 'Meteoro' e 'Estrela'.
+
+Diagrama de Sequência: Fluxo temporal de detecção de colisão, resposta sonora e redução de vida.
+
+🔗 Link de Produção (Vercel)
+https://game-foguete.vercel.app/index.html
+
