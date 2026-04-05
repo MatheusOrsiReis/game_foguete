@@ -1,55 +1,69 @@
-# 🚀 Space Race 2P - Desafio Estelar
+🚀 Space Race 2P - Desafio Estelar
+Desenvolvedor: Matheus Orsi Reis
 
-**Desenvolvedor:** Matheus Orsi Reis  
-**Product Owner:** Carlos Roberto da Silva Filho
+Product Owner: Carlos Roberto da Silva Filho
 
----
+📖 1. Visão Geral do Sistema
+Descrição
+O Space Race 2P é um software de entretenimento do tipo game desenvolvido para navegadores modernos. Utilizando a tecnologia HTML5 Canvas, o jogo oferece uma experiência de corrida e sobrevivência com física de colisão em tempo real e suporte a dois jogadores simultâneos.
 
-## 📖 1. Visão Geral do Sistema
+Objetivo e Tema
+O tema escolhido é a Exploração Espacial. O objetivo principal do jogador é pilotar um foguete em uma zona de asteroides, desviando de obstáculos (Meteoros) e coletando recursos (Estrelas). O jogo possui progressão de dificuldade automática conforme a pontuação aumenta.
 
-### Descrição
-O **Space Race 2P** é um software de entretenimento do tipo game desenvolvido para navegadores modernos. Utilizando a tecnologia **HTML5 Canvas**, o jogo oferece uma experiência de corrida e sobrevivência com física de colisão em tempo real e suporte a dois jogadores simultâneos.
+🎮 Instruções de Jogabilidade (Manual)
+Jogador 1 (Esquerda): Teclas W (Subir) e S (Descer).
 
-### Objetivo e Tema
-O tema escolhido é a **Exploração Espacial**. O objetivo principal do jogador é pilotar um foguete em uma zona de asteroides, desviando de obstáculos (Meteoros) e coletando recursos (Estrelas). O jogo possui progressão de dificuldade automática conforme a pontuação aumenta.
+Jogador 2 (Direita): Setas do teclado UP (Subir) e DOWN (Descer).
 
-### 🎮 Instruções de Jogabilidade (Manual)
-* **Jogador 1 (Esquerda):** Teclas **W** (Subir) e **S** (Descer).
-* **Jogador 2 (Direita):** Setas do teclado **UP** (Subir) e **DOWN** (Descer).
-* **Coletáveis (Estrela):** Soma **5 pontos** ao placar.
-* **Obstáculos (Meteoro):** Reduz **1 vida** ao colidir.
+Coletáveis (Estrela): Soma 5 pontos ao placar.
 
----
+Obstáculos (Meteoro): Reduz 1 vida ao colidir.
 
-## ⚙️ 2. Especificações Técnicas e Regras de Negócio
+⚙️ 2. Especificações Técnicas e Regras de Negócio
+A. Requisitos Funcionais (Funcoes do Sistema)
+RF01 - Iniciar Jogo: Inicia o ciclo de vida do game via funcao main().
 
-### A. Requisitos Funcionais (RF)
-* **RF01 - Movimentação:** Controle dos foguetes no eixo Y (Vertical) via teclado, capturado por eventos de 'keydown'.
-* **RF02 - Sistema de Vidas:** Jogadores iniciam com 3 vidas; a detecção de colisão decrementa este valor na classe Foguete.
-* **RF03 - Pontuação:** Placar dinâmico que contabiliza estrelas (+5) e sobrevivência a meteoros (+1).
-* **RF04 - Coletáveis:** Classe 'Estrela' gera itens aleatórios que bonificam o jogador ao contato.
-* **RF05 - Progressão de Fases:** Transição automática entre 3 níveis baseada na pontuação (100, 200 e 300 pontos).
-* **RF06 - Interface (Telas):** Implementação de Menu Inicial, HUD de Jogo, Tela "Sobre" e Telas de Vitória/Derrota.
+RF02 - Movimentacao: Processa comandos de teclado via funcoes movimentar() e mov_est().
 
-### B. Regras de Negócio (RN)
-* **RN01 - Dificuldade Progressiva:** A cada fase, a velocidade dos meteoros aumenta (vel: 8, 10 e 12) via função 'ver_fase()'.
-* **RN02 - Troca de Cenário:** O background do jogo é alterado dinamicamente para indicar a progressão entre as 3 fases.
-* **RN03 - Condição de Vitória:** O jogador vence ao atingir 300 pontos com pelo menos 1 vida restante.
-* **RN04 - Manual de Instruções:** Instruções de comando, sistema de vidas e pontuação exibidas na tela de menu.
+RF03 - Deteccao de Colisao: Verifica interseccao de objetos via funcao colisao().
 
-### C. Requisitos Não Funcionais (RNF)
-* **RNF01 - Tecnologia:** Desenvolvido em JavaScript puro (ES6+), sem frameworks externos.
-* **RNF02 - Portabilidade:** Execução direta no navegador através da API HTML5 Canvas.
-* **RNF03 - Usabilidade:** Layout fixo otimizado para a resolução de 1920 x 1080 px.
-* **RNF04 - Desempenho:** Taxa de atualização estável de 60 FPS garantida pelo método 'requestAnimationFrame'.
+RF04 - Renderizacao: Desenha componentes graficos via funcoes desenha() e desenha_menu().
 
+RF05 - Controle de Fases: Gerencia a transicao de niveis via funcao ver_fase().
 
-## 💻 3. Instruções de Instalação e Execução
+RF06 - Sistema de Coletaveis: Gera e gerencia itens de pontuacao via classe Estrela.
 
-1. **Clonagem do Repositório:**
-   ```bash
-   git clone [https://github.com/MatheusOrsiReis/game_foguete.git](https://github.com/MatheusOrsiReis/game_foguete.git)
-   
+RF07 - Interface de Creditos: Exibe dados do desenvolvedor e PO via tela Sobre.
+
+RF08 - Finalizacao: Processa o fim do jogo e telas de resultado via funcao game_over().
+
+B. Regras de Negocio (Logica e Condicoes)
+RN01 - Pontuacao: Estrelas valem 5 pontos e sobrevivencia a meteoros vale 1 ponto.
+
+RN02 - Sistema de Vidas: Colisao com obstaculo remove 1 vida do jogador (Propriedade this.vida).
+
+RN03 - Dificuldade Progressiva: Aumento de velocidade obrigatorio nos marcos de 100 e 200 pontos (Variavel vel_meteoro).
+
+RN04 - Troca de Cenario: Alteracao obrigatoria do background a cada fase alcancada.
+
+RN05 - Condicao de Vitoria: Necessario atingir 300 pontos com pelo menos 1 vida restante.
+
+RN06 - Condicao de Derrota: Ocorre automaticamente ao zerar o contador de vidas, chamando a tela de Game Over.
+
+C. Requisitos Nao Funcionais (Desempenho e Tecnologia)
+RNF01 - Taxa de Atualizacao: Execucao estavel em 60 FPS via requestAnimationFrame.
+
+RNF02 - Tecnologia Padrao: Uso exclusivo de JavaScript ES6+ e HTML5 Canvas (Sem bibliotecas).
+
+RNF03 - Resolucao: Interface travada em 1920x1080 pixels (Resolucao Full HD).
+
+RNF04 - Portabilidade: O sistema deve rodar diretamente no navegador (Web-based).
+
+💻 3. Instruções de Instalação e Execução
+Clonagem do Repositório:
+
+Bash
+git clone https://github.com/MatheusOrsiReis/game_foguete.git
 Execução:
 Abra o arquivo index.html diretamente em seu navegador ou utilize a extensão Live Server no VS Code.
 
@@ -64,4 +78,3 @@ Diagrama de Sequência: Fluxo temporal de detecção de colisão, resposta sonor
 
 🔗 Link de Produção (Vercel)
 https://game-foguete.vercel.app/index.html
-
