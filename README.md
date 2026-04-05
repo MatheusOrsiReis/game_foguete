@@ -1,4 +1,4 @@
-# 🚀 Space Race 2P - Desafio Estelar
+# 🚀 Space Adventure 2P - Desafio Estelar
 
 **Desenvolvedor:** Matheus Orsi Reis  
 **Product Owner:** Carlos Roberto da Silva Filho
@@ -14,8 +14,8 @@ O **Space Race 2P** é um software de entretenimento do tipo game desenvolvido p
 O tema escolhido é a **Exploração Espacial**. O objetivo principal do jogador é pilotar um foguete em uma zona de asteroides, desviando de obstáculos (Meteoros) e coletando recursos (Estrelas). O jogo possui progressão de dificuldade automática conforme a pontuação aumenta.
 
 ### 🎮 Instruções de Jogabilidade (Manual)
-* **Jogador 1 (Esquerda):** Teclas **W** (Subir) e **S** (Descer).
-* **Jogador 2 (Direita):** Setas do teclado **UP** (Subir) e **DOWN** (Descer).
+* **Jogador 2 (Esquerda):** Teclas **W** (Subir) e **S** (Descer).
+* **Jogador 1 (Direita):** Setas do teclado **UP** (Subir) e **DOWN** (Descer).
 * **Coletáveis (Estrela):** Soma **5 pontos** ao placar.
 * **Obstáculos (Meteoro):** Reduz **1 vida** ao colidir.
 
