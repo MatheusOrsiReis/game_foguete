@@ -80,9 +80,13 @@ class Meteoro extends Obj{
 
 class Texto{
     desenhar(valor, x, y, cor, fonte){
+        des.save()
+        des.setTransform(1, 0, 0, 1, 0, 0)
+        des.textBaseline = 'top'
         des.fillStyle = cor
         des.font = fonte
         des.fillText(valor, x, y)
+        des.restore()
     }
 }
 

@@ -19,18 +19,15 @@ body {
 }
 
 canvas {
-    /* Borda opcional para ver onde o jogo termina */
-    border: 1px solid #333; 
-    
-   /* Imagem do fundo da galaxia
-    background-image: url('./img/galaxiaanimada.gif');  */
-    
-    /* Faz a galáxia aparecer inteira sem esticar */
+    border: 1px solid #333;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    
     background-color: black;
+    
+    /* ADICIONE ESSAS DUAS LINHAS: */
+    width: 1200px;
+    height: 700px;
 }
 
 .main-title {
